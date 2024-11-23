@@ -63,7 +63,6 @@ The question is simple: mention the data types required to complete a shopping e
 ```
 Challenge:
 
-```
 // 1. Case Sensitivity
 let age = 1; 
 let Age = 2; 
@@ -100,7 +99,6 @@ console.log(typeof NaN); // "number"
 Assignment:
 
 ```
-```
 # Solution for 2: Functions
 
 Everything that I studied, that is, all the theory with the programs is metioned in the excercise_.js file
@@ -110,7 +108,6 @@ This assignment will familiarise you with the use of functions in different situ
 
 ## Function that returns something:
 
-```
 function addNumbers(a, b) {
     return a + b;
 }
@@ -119,11 +116,8 @@ function addNumbers(a, b) {
 const result = addNumbers(1, 2);
 console.log(`Sum: ${result}`); // Output: Sum: 3
 
-
-```
 ## Function that doesn't return anything
 
-```
 def greet_user(name):
 function greetUser(name) {
     console.log(`Hello, ${name}!`);
@@ -132,29 +126,18 @@ function greetUser(name) {
 // Example usage:
 greetUser("Prarthana"); // Output: Hello, Prarthana!
 
-
-```
 ## Function with no Parameters
 
-```
 function printMessage() {
     console.log("Dream Team Task: 04");
 }
 printMessage(); 
-
-```
 ## Function with mix parameters
-
-```
 function introducePerson(name, age = 20, city = "Hyd") {
     return `My name is ${name}, I am ${age} years old, and I live in ${city}.`;
 }
 const intro1 = introducePerson("Prarthana");
 console.log(intro1);
-
-```
-
-```
 
 ```
 
