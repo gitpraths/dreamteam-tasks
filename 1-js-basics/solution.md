@@ -1,65 +1,66 @@
 # Solution for JS-Basics
 
-1. Sub Topic 1
+## Sub-Topic 1: Data Types
 
-Assignment:
+### Assignment:
 
+Everything that I studied, including the theory and programs, is mentioned in the `exercise_.js` file.  
+I have also attached a JS file to run and check the code.
 
-# Solution for 1: data types
+### Task:  
+The question is simple: mention the data types required to complete a shopping experience.
 
-Everything that I studied, that is, all the theory with the programs is metioned in the excercise_.js file
-I have also attached a js file to run and check the code.
+### The Experience is Divided into Five Parts:
 
-The question is quite simple. We need to mention the data types that we would need to complete a shopping experience.
-
-The experience can be divided into 5 different parts:
-
-## User Login detials
-| Name (Property) | Data Type | Reason                                                                                  |
-|------------------|-----------|----------------------------------------------------------------------------------------|
-| `id`            | String    | - Unique identifier for the user.                                                     <br> - String is used as it will be a combination of letters and numbers. |
-| `name`          | String    | - Name of Customer.                                                                   <br> - String is used to store names. |
-| `email`         | String    | - Authentication.                                                                     <br> - Combination of letters, numbers, and special characters. |
-| `isLoggedIn`    | Boolean   | - Check the status of a session.                                                      <br> - A user can be logged in or not, thus Boolean. |
+#### 1. User Login Details
+| Property      | Data Type | Reason                                                                                   |
+|---------------|-----------|-----------------------------------------------------------------------------------------|
+| `id`          | String    | Unique identifier for the user; often a mix of letters and numbers.                     |
+| `name`        | String    | Stores the user's name.                                                                 |
+| `email`       | String    | Authentication purposes; combination of letters, numbers, and special characters.       |
+| `isLoggedIn`  | Boolean   | Indicates if the user is logged in.                                                     |
 
 ---
 
-## Product Information
-| Name (Property) | Data Type | Reason                                                                                  |
-|------------------|-----------|----------------------------------------------------------------------------------------|
-| `id`            | String    | - Unique identifier for each product.                                                 <br> - String is used as it will be a combination of letters and numbers. |
-| `name`          | String    | - Name of Product.                                                                    <br> - String is used to store names. |
-| `price`         | Double    | - Represents the cost of the product.                                                 <br> - Number is used to perform final cost calculations. |
-| `quantity`      | Integer   | - Number of products available.                                                       |
-| `isAvailable`   | Boolean   | - Checks if a product is available or not.                                            <br> - A product can be available or not, thus Boolean. |
+#### 2. Product Information
+| Property      | Data Type | Reason                                                                                   |
+|---------------|-----------|------------------------------------------------------------------------------------------|
+| `id`          | String    | Unique identifier for each product.                                                     |
+| `name`        | String    | Name of the product.                                                                     |
+| `price`       | Double    | Represents the cost of the product; used in calculations.                                |
+| `quantity`    | Integer   | Number of products available.                                                            |
+| `isAvailable` | Boolean   | Checks if the product is in stock.                                                       |
 
 ---
 
-## Shopping Cart
-| Name (Property) | Data Type | Reason                                                                                  |
-|------------------|-----------|----------------------------------------------------------------------------------------|
-| `items`         | Array     | - Holds all the products added to the cart.                                           |
-| `totalPrice`    | Double    | - Sum of prices will be a double.                                                     |
-| `discount`      | Double    | - Stores discount percentage or amount.                                               |
+#### 3. Shopping Cart
+| Property      | Data Type | Reason                                                                                   |
+|---------------|-----------|------------------------------------------------------------------------------------------|
+| `items`       | Array     | Holds all products added to the cart.                                                    |
+| `totalPrice`  | Double    | Total price of the products in the cart.                                                 |
+| `discount`    | Double    | Stores discount percentage or amount.                                                    |
 
 ---
 
-## Payment Details
-| Name (Property) | Data Type | Reason                                                                                  |
-|------------------|-----------|----------------------------------------------------------------------------------------|
-| `cardNumber`    | String    | - Allows payment processing systems to validate it.                                    <br> - It will be a combination of numbers and dashes. |
-| `totalPaid`     | Double    | - Reflects the final amount after discounts.                                           |
+#### 4. Payment Details
+| Property      | Data Type | Reason                                                                                   |
+|---------------|-----------|------------------------------------------------------------------------------------------|
+| `cardNumber`  | String    | Used for payment processing; combination of numbers and dashes.                          |
+| `totalPaid`   | Double    | Reflects the final amount paid after applying discounts.                                 |
 
 ---
 
-## Order Summary
-| Name (Property) | Data Type | Reason                                                                                  |
-|------------------|-----------|----------------------------------------------------------------------------------------|
-| `orderId`       | String    | - Unique identifier for each order.                                                    |
-| `items`         | Array     | - Lists purchased products.                                                            |
-| `totalPrice`    | Double    | - Reflects the amount charged.                                                         |
-| `deliveryDate`  | String    | - Displays the estimated delivery date.                                                |
+#### 5. Order Summary
+| Property      | Data Type | Reason                                                                                   |
+|---------------|-----------|------------------------------------------------------------------------------------------|
+| `orderId`     | String    | Unique identifier for each order.                                                        |
+| `items`       | Array     | Lists the purchased products.                                                            |
+| `totalPrice`  | Double    | Reflects the amount charged for the order.                                               |
+| `deliveryDate`| String    | Displays the estimated delivery date.                                                    |
 
+---
+
+```
 Challenge:
 
 ```
@@ -94,10 +95,11 @@ console.log(typeof NaN); // "number"
 // typeof NaN returns "number" because NaN is technically a special value of the number type.
 
 ```
-2. Function Methods
+2. Sub Topic 2
 
 Assignment:
 
+```
 ```
 # Solution for 2: Functions
 
@@ -105,54 +107,54 @@ Everything that I studied, that is, all the theory with the programs is metioned
 I have also attached a js file to run and check the code.
 
 This assignment will familiarise you with the use of functions in different situations.
-```
-```
+
 ## Function that returns something:
 
-
+```
 function addNumbers(a, b) {
     return a + b;
 }
 
 // Example usage:
 const result = addNumbers(1, 2);
-console.log('Sum: ${result}'); // Output: Sum: 3
+console.log(`Sum: ${result}`); // Output: Sum: 3
 
 
-```
 ```
 ## Function that doesn't return anything
+
+```
 def greet_user(name):
 function greetUser(name) {
-    console.log('Hello, ${name}!');
+    console.log(`Hello, ${name}!`);
 }
 
 // Example usage:
 greetUser("Prarthana"); // Output: Hello, Prarthana!
-```
+
+
 ```
 ## Function with no Parameters
+
+```
 function printMessage() {
     console.log("Dream Team Task: 04");
 }
 printMessage(); 
 
 ```
-```
 ## Function with mix parameters
+
+```
 function introducePerson(name, age = 20, city = "Hyd") {
-    return 'My name is ${name}, I am ${age} years old, and I live in ${city}.';
+    return `My name is ${name}, I am ${age} years old, and I live in ${city}.`;
 }
 const intro1 = introducePerson("Prarthana");
 console.log(intro1);
 
 ```
-Challenge:
 
 ```
-Functions are standalone blocks of code that perform tasks, while methods are functions associated with an object and can access and modify the object's data.
-
-Functions are independent and can be called on their own, whereas methods are tied to objects and operate on the object's attributes.
 
 ```
 
