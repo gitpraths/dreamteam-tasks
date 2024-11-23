@@ -1,4 +1,7 @@
-# Solution for 2: Data Types
+# Solution for 2: Functions
+
+Everything that I studied, that is, all the theory with the programs is metioned in the excercise_.js file
+I have also attached a js file to run and check the code.
 
 This assignment will familiarise you with the use of functions in different situations.
 

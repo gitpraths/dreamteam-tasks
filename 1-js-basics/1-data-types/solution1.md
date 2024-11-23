@@ -1,5 +1,8 @@
 # Solution for 1: data types
 
+Everything that I studied, that is, all the theory with the programs is metioned in the excercise_.js file
+I have also attached a js file to run and check the code.
+
 The question is quite simple. We need to mention the data types that we would need to complete a shopping experience.
 
 The experience can be divided into 5 different parts:
