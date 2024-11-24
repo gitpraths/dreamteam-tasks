@@ -18,5 +18,6 @@ Spreadsheets are widely used for organizing data, performing calculations, and g
 ## Using the `openpyxl` Module  
 
 1. **Installation**: Install the module using pip:  
-   ```bash
+```bash
    pip install openpyxl
+```
