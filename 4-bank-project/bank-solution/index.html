@@ -15,9 +15,10 @@
     <h1>Bank App</h1>
     <section>
       <h2>Login</h2>
-      <form id="loginForm">
-        <label for="username">Username</label>
-        <input id="username" name="username" type="text" placeholder="Enter your username" required>
+      <form id="loginForm" action="javascript:login()">
+        <label for="user">Username</label>
+        <input id="user" name="user" type="text" placeholder="Enter your username" required>
+        <div id="loginError" role="alert" class="error-message"></div> <!-- Placeholder for error message -->
         <button type="submit">Login</button>
       </form>
     </section>
@@ -25,80 +26,57 @@
       <p>New user? <a href="/register" onclick="onLinkClick(event)">Register here</a></p>
     </section>
   </template>
+
   <!-- Register Template -->
-<template id="register">
-  <h1>Bank App</h1>
-  <section>
-    <h2>Register</h2>
-    <form id="registerForm" action="javascript:register()" method="POST">
-      <!-- Error Message -->
-      <div id="errorMessage" style="display: none; color: red; font-size: 0.9rem; margin-bottom: 10px;">
-        User already exists! Please choose a different username.
-      </div>
-
-      <label for="user">Username <span aria-label="required">*</span></label>
-      <input id="user" name="user" type="text" maxlength="20" placeholder="Choose a username" required>
-
-      <label for="currency">Currency <span aria-label="required">*</span></label>
-      <input id="currency" name="currency" type="text" value="$" maxlength="5" placeholder="e.g., $, €, ₹" required>
-
-      <label for="description">Description</label>
-      <input id="description" name="description" type="text" maxlength="100" placeholder="Tell us about yourself (optional)">
-
-      <label for="balance">Starting Balance</label>
-      <input id="balance" name="balance" type="number" value="0" placeholder="Enter initial balance">
-
-      <button type="submit">Register</button>
-    </form>
-  </section>
-  <section>
-    <p>Already registered? <a href="/login" onclick="onLinkClick(event)">Login here</a></p>
-  </section>
-</template>
-  <!-- Dashboard Template -->
-  <template id="dashboard">
-    <header>
-      <h1>Bank App</h1>
-      <a href="/login" onclick="onLinkClick(event)">Logout</a>
-    </header>
+  <template id="register">
+    <h1>Bank App</h1>
     <section>
-      <h2>Your Balance</h2>
-      <p id="balanceDisplay">Balance: 100$</p>
+      <h2>Register</h2>
+      <form id="registerForm" action="javascript:register()">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" placeholder="Enter your username" required>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" placeholder="Enter your password" required>
+        <div id="registerError" role="alert" class="error-message"></div> <!-- Placeholder for error message -->
+        <button type="submit">Register</button>
+      </form>
     </section>
     <section>
-      <h2>Transactions</h2>
+      <p>Already have an account? <a href="/login" onclick="onLinkClick(event)">Login here</a></p>
+    </section>
+  </template>
+
+  <!-- Dashboard Template -->
+  <template id="dashboard">
+    <h1>Dashboard</h1>
+    <section>
+      <h2 id="description">Account Overview</h2>
+      <section>
+        <div class="balance-info">
+          Balance: <span id="balance">0.00</span> <span id="currency">Ruppees</span>
+        </div>
+      </section>
+      <h3>Transactions</h3>
       <table>
         <thead>
           <tr>
             <th>Date</th>
-            <th>Description</th>
+            <th>Object</th>
             <th>Amount</th>
           </tr>
         </thead>
-        <tbody id="transactionTable">
-          <!-- Dynamic content will be added here -->
-        </tbody>
+        <tbody id="transactions"></tbody> <!-- Placeholder for transactions -->
       </table>
-    </section>
-    <section>
-      <a href="/credits" onclick="onLinkClick(event)">View Credits</a>
     </section>
   </template>
 
-  <!-- Credit Template -->
-  <template id="credits">
-    <header>
-      <h1>Credits</h1>
-      <a href="/dashboard" onclick="onLinkClick(event)">Back to Dashboard</a>
-    </header>
-    <section>
-      <h2>App Development</h2>
-      <p>Developed by: Prarthana</p>
-    </section>
-    <section>
-      <h2>Special Thanks</h2>
-      <p>Special thanks to all contributors and the open-source libraries used in this project.</p>
-    </section>
+  <!-- Transaction Template -->
+  <template id="transaction">
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
   </template>
 </body>
 </html>
