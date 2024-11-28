@@ -18,12 +18,12 @@
       <form id="loginForm" action="javascript:login()">
         <label for="user">Username</label>
         <input id="user" name="user" type="text" placeholder="Enter your username" required>
-        <div id="loginError" role="alert" class="error-message"></div> <!-- Placeholder for error message -->
+        <div id="loginError" role="alert" class="error-message"></div>
         <button type="submit">Login</button>
       </form>
     </section>
     <section>
-      <p>New user? <a href="/register" onclick="onLinkClick(event)">Register here</a></p>
+      <p>New user? <a href="#" onclick="event.preventDefault(); navigate('/register')">Register here</a></p>
     </section>
   </template>
 
@@ -37,38 +37,65 @@
         <input id="username" name="username" type="text" placeholder="Enter your username" required>
         <label for="password">Password</label>
         <input id="password" name="password" type="password" placeholder="Enter your password" required>
-        <div id="registerError" role="alert" class="error-message"></div> <!-- Placeholder for error message -->
+        <div id="registerError" role="alert" class="error-message"></div>
         <button type="submit">Register</button>
       </form>
     </section>
     <section>
-      <p>Already have an account? <a href="/login" onclick="onLinkClick(event)">Login here</a></p>
+      <p>Already have an account?<a href="#" onclick="event.preventDefault(); navigate('/login')">Login here</a></p>
     </section>
   </template>
 
   <!-- Dashboard Template -->
   <template id="dashboard">
     <h1>Dashboard</h1>
+    <button onclick="logout()">Logout</button>
+    
     <section>
       <h2 id="description">Account Overview</h2>
-      <section>
-        <div class="balance-info">
-          Balance: <span id="balance">0.00</span> <span id="currency">Ruppees</span>
-        </div>
-      </section>
+      <div>
+        Balance: <span id="balance">0.00</span> <span id="currency">USD</span>
+      </div>
+    </section>
+    
+    <section>
       <h3>Transactions</h3>
+      <button onclick="showAddTransactionDialog()">Add Transaction</button>
+      
       <table>
         <thead>
           <tr>
             <th>Date</th>
             <th>Object</th>
             <th>Amount</th>
+            <th>Actions</th>
           </tr>
         </thead>
-        <tbody id="transactions"></tbody> <!-- Placeholder for transactions -->
+        <tbody id="transactions"></tbody>
       </table>
+
+      <!-- Add Transaction Dialog -->
+      <div id="addTransactionDialog" class="dialog" role="dialog" aria-labelledby="dialogTitle" aria-hidden="true">
+        <h2 id="dialogTitle">Add Transaction</h2>
+        <form id="addTransactionForm" action="javascript:addTransaction()">
+          <label for="transactionDate">Date</label>
+          <input id="transactionDate" name="transactionDate" type="date" required>
+    
+          <label for="transactionObject">Object</label>
+          <input id="transactionObject" name="transactionObject" type="text" placeholder="Transaction object" required>
+    
+          <label for="transactionAmount">Amount</label>
+          <input id="transactionAmount" name="transactionAmount" type="number" step="0.01" placeholder="Amount" required>
+    
+          <div id="transactionError" role="alert" class="error-message"></div>
+          
+          <button type="submit">Add Transaction</button>
+          <button type="button" onclick="closeAddTransactionDialog()">Cancel</button>
+        </form>
+      </div>
     </section>
   </template>
+  
 
   <!-- Transaction Template -->
   <template id="transaction">
@@ -76,7 +103,9 @@
       <td></td>
       <td></td>
       <td></td>
+      <td><button class="delete-button">Delete</button></td>
     </tr>
-  </template>
+  </template>  
+  
 </body>
 </html>

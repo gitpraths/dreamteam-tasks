@@ -716,3 +716,101 @@ This part describes what the function returns.
 `{Node}` indicates that the function will return a DOM node (likely an HTML element).
 - `Transaction row element` describes what that node represents (a transaction row element in this case).
 
+4. Sun Topic 4
+
+Assignment:
+
+```js
+/**
+ * Handles adding a transaction and updates balance.
+ */
+async function addTransaction() {
+  const transactionForm = document.getElementById('addTransactionForm');
+  const date = transactionForm.transactionDate.value;
+  const object = transactionForm.transactionObject.value.trim();
+  let amount = parseFloat(transactionForm.transactionAmount.value);
+
+  if (!date || !object || isNaN(amount)) {
+    return updateElement('transactionError', 'All fields are required, and the amount must be valid.');
+  }
+
+  // Negative amounts are treated as expenses, positive as income
+  const transaction = { date, object, amount };
+
+  // Assuming API endpoint to add transaction is `POST /api/transactions`
+  const data = await sendRequest('POST', `${API_BASE_URL}/${state.account.user}/transactions`, transaction);
+
+  if (data.error) {
+    return updateElement('transactionError', data.error);
+  }
+
+  // Add the new transaction to the account's transaction history
+  state.account.transactions.push(data);
+
+  // Update the account balance: 
+  // If it's positive, add to balance; if it's negative, subtract from balance
+  state.account.balance += amount;
+
+  // Update the state and save it
+  updateState('account', state.account);
+  saveState();
+
+  // Close dialog and refresh dashboard
+  closeAddTransactionDialog();
+  updateDashboard();
+}
+```
+Challenge:
+
+Only essential details that are needed for the app to function properly (like the username or session token, if applicable) should be stored in `localStorage`
+
+```js
+/**
+ * Saves the current state to localStorage.
+ */
+function saveState() {
+  const account = state.account;
+  if (account) {
+    localStorage.setItem(storageKey, JSON.stringify({ user: account.user }));
+  } else {
+    localStorage.removeItem(storageKey);
+  }
+}
+
+```
+```js
+/**
+ * Loads the state from localStorage.
+ */
+function loadState() {
+  const savedAccount = localStorage.getItem(storageKey);
+  if (savedAccount) {
+    const { user } = JSON.parse(savedAccount);
+    if (user) {
+      updateState('account', { user });
+    }
+  }
+}
+
+```
+
+```js
+/**
+ * Updates the account data from the server.
+ */
+async function updateAccountData() {
+  const account = state.account;
+  if (!account || !account.user) {
+    return logout();
+  }
+
+  const data = await getAccount(account.user);
+  if (data.error) {
+    return logout();
+  }
+
+  updateState('account', data);
+}
+
+
+```
