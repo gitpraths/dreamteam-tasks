@@ -1,0 +1,50 @@
+# Ignore operating system files
+.DS_Store
+Thumbs.db
+
+# Ignore virtual environment files
+venv/
+env/
+virtualenv/
+
+# Ignore Python files
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore Flask cache files
+.flaskenv
+.flaskapp
+__pycache__/
+
+# Ignore logs
+*.log
+
+# Ignore IDE files
+.vscode/
+.idea/
+PyCharm/
+
+# Ignore miscellaneous files
+*.bak
+*.tmp
+
+# Ignore Flask project files
+ flask_session/
+ instance/
+ templates_c/
+ migrations/
+
+# Ignore SQLite database files
+*.db
+*.db-journal
+
+# Ignore test files
+tests/__pycache__/
+
+# Ignore coverage reports
+.coverage
+coverage.xml
+
+# Ignore documentation files
+docs/_build/flask_bcrypt 
