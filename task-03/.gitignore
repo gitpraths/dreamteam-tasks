@@ -1,0 +1,59 @@
+# MacOS-specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+env/
+venv/
+
+# pipenv environment/lock files (if you use pipenv)
+Pipfile
+Pipfile.lock
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# pytest cache files
+.pytest_cache/
+*.pytest_cache
+
+# PyCharm project files
+.idea/
+
+# VSCode project files
+.vscode/
+
+# Logs and debug files
+*.log
+debug.log
+
+# Configuration files & credentials
+*.env
+credentials.json  # For APIs like Google
+config.json       # User-defined sensitive configuration
+*.key             # Private keys (e.g., for SSH or APIs)
+*.pem             # Certificate files
+
+# Compiled C extensions
+*.so
+
+# macOS metadata backups
+.Trashes
+*.swp
+._*
+
+# Backup files
+*.bak
+*.tmp
+*~
+
+# CSV and Excel crash backups (if modifying such files)
+~$*.xls
+~$*.xlsx
+~$*.docx
