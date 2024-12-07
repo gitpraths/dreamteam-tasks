@@ -56,7 +56,7 @@ This repository documents my journey of completing the tasks assigned in the Dre
 * Key features include:  
   - **Dynamic Routing**: Each movie has its own detailed page using Next.js dynamic routing.  
   - **Responsive Design**: Mobile-first development for seamless user experience across devices.  
-  - **Modern UI**: Utility-first styling with TailwindCSS for a sleek and attractive interface.
+  - **Modern UI**: Utility-first styling with TailwindCSS with additional features of Search and Favorites.
 
 ### Task 09: Backend Development  
 * **Status**: Completed  
