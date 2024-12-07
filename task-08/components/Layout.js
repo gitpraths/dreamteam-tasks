@@ -21,13 +21,6 @@ export default function Layout({ children }) {
                 href="/favorites"
                 className="mx-4 text-white hover:text-primary"
               >
-                Favorites
-              </Link>
-
-              <Link
-                href="/profile"
-                className="mx-4 text-white hover:text-primary"
-              >
                 Profile
               </Link>
 
