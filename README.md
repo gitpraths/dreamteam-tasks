@@ -27,7 +27,7 @@ This repository documents my journey of completing the tasks assigned in the Dre
 * **Status**: Completed (Except Chapter 18)
 * Automated repetitive tasks using Python scripts.  
 * Tasks included file operations, web scraping, and scheduling.
-* Couldn't prepare a README>md file for chapter 16 and 17 as well...
+* Couldn't prepare a README.md file for chapter 16 and 17 as well...
 
 ### Task 04: Web Dev Basics  
 * **Status**: Completed  
