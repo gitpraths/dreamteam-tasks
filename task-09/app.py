@@ -410,6 +410,24 @@ def search_movies():
 
     return jsonify(response), 200
 
+@app.route("/profile", methods=["GET"])
+@jwt_required()
+def get_profile():
+    current_user_username = get_jwt_identity()
+
+    # Query the database to retrieve the user's details
+    user = User.query.filter_by(username=current_user_username).first()
+
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    user_profile = {
+        "id": user.id,
+        "username": user.username,
+        "email": user.email,
+    }
+
+    return jsonify({"profile": user_profile}), 200
 
 with app.app_context():
     db.create_all()

@@ -8,6 +8,22 @@ export default function FavoriteMovies() {
   const [sortBy, setSortBy] = useState("title");
   const [sortOrder, setSortOrder] = useState("asc");
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState([]);
+
+  const profile = async () => {
+    const token = localStorage.getItem("access_token");
+
+    try {
+      const response = await api.get("/profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log("respone", JSON.stringify(response.data.profile));
+      setUser(response.data.profile);
+    } catch (error) {
+      console.error("Error fetching favorites:", error);
+    } finally {
+    }
+  };
 
   const fetchFavorites = async () => {
     setLoading(true);
@@ -51,10 +67,16 @@ export default function FavoriteMovies() {
     fetchFavorites();
   }, [search, sortBy, sortOrder]);
 
+  useEffect(() => {
+    profile();
+  }, []);
+
   return (
     <div>
       <Layout>
         <div className="container text-gray-800 mt-4">
+          <h1>{user.username}'s Profile</h1>
+          <p>Email: {user.email}</p>
           <h1>Your Favorite Movies</h1>{" "}
           <div className="mb-3 d-flex py-4">
             <select
