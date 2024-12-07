@@ -14,6 +14,7 @@ from sqlalchemy.pool import StaticPool
 app = Flask(__name__)
 CORS(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db?check_same_thread=False"
+
 app.config["JWT_SECRET_KEY"] = "07f68d6ff8accdc14850"
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
     "poolclass": StaticPool,
@@ -24,10 +25,12 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
+
 class Favorite(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     movie_id = db.Column(db.Integer, db.ForeignKey("movie.id"), nullable=False)
+
     movie = db.relationship("Movie", backref="favorites")
 
     __table_args__ = (
@@ -37,11 +40,13 @@ class Favorite(db.Model):
     def __repr__(self):
         return f"<Favorite(user_id={self.user_id}, movie_id={self.movie_id})>"
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)
+
     favorites = db.relationship("Favorite", backref="user", lazy=True)
 
     def __init__(self, username, email, password):
@@ -52,17 +57,20 @@ class User(db.Model):
     def check_password(self, password):
         return bcrypt.check_password_hash(self.password, password)
 
+
 class Movie(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     overview = db.Column(db.Text, nullable=False)
     poster = db.Column(db.String(200), nullable=False)
     release_date = db.Column(db.Integer, nullable=False)
+
     favorited_by = db.relationship("Favorite", backref="favorited_movie", lazy=True)
     comments = db.relationship("Comment", backref="movie", lazy=True)
 
     def __repr__(self):
         return f"Movie('{self.title}', '{self.overview}')"
+
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -73,6 +81,7 @@ class Comment(db.Model):
 
     def __repr__(self):
         return f"Comment('{self.content}', '{self.timestamp}')"
+
 
 @app.route("/register", methods=["POST"])
 def register():
@@ -96,12 +105,14 @@ def register():
         return jsonify(
             {"message": "Username is already taken. Please choose another."}
         ), 400
+
     try:
         user = User(username, email, password)
         db.session.add(user)
         db.session.commit()
+
         return jsonify({"message": "User created successfully!"}), 201
-    
+
     except db.DatabaseError as e:
         db.session.rollback()  # Roll back to maintain session consistency
         return jsonify({"message": "Error registering user."}), 500
@@ -110,6 +121,7 @@ def register():
         print(f"An unexpected error occurred: {e}")
         return jsonify({"message": "An unexpected error occurred."}), 500
 
+
 @app.route("/login", methods=["POST"])
 def login():
     username = request.json.get("username")
@@ -117,7 +129,7 @@ def login():
 
     if not username or not password:
         return jsonify({"message": "Username and password are required"}), 400
-    
+
     user = User.query.filter_by(username=username).first()
     if not user:
         return jsonify({"message": "User not found"}), 401
@@ -130,16 +142,19 @@ def login():
     access_token = create_access_token(identity=username)
     return jsonify({"access_token": access_token, "username": username}), 200
 
+
 @app.route("/protected", methods=["GET"])
 @jwt_required()
 def protected():
     return jsonify({"message": "Hello, authenticated user!"}), 200
+
 
 @app.route("/movies", methods=["GET"])
 def get_movies():
     page = int(request.args.get("page", 1))
     per_page = int(request.args.get("per_page", 20))
     offset = (page - 1) * per_page
+
     movies = Movie.query.offset(offset).limit(per_page).all()
     total_movies = Movie.query.count()
     total_pages = (
@@ -147,6 +162,7 @@ def get_movies():
         if total_movies % per_page != 0
         else total_movies // per_page
     )
+
     movie_list = [
         {
             "id": movie.id,
@@ -167,6 +183,7 @@ def get_movies():
 
     return jsonify(response), 200
 
+
 @app.route("/movies/<int:movie_id>", methods=["GET"])
 def get_movie_details(movie_id):
     movie = db.session.get(Movie, movie_id)
@@ -181,6 +198,7 @@ def get_movie_details(movie_id):
         "release_date": movie.release_date,
     }
     return jsonify(movie_details), 200
+
 
 @app.route("/movies/<int:movie_id>/comments", methods=["POST"])
 @jwt_required()
@@ -201,6 +219,7 @@ def add_comment(movie_id):
     content = request.json.get("content")
     if not content or content.strip() == "":
         return jsonify({"error": "Comment content cannot be empty"}), 400
+
     try:
         comment = Comment(content=content, movie_id=movie.id, user_id=user.id)
         db.session.add(comment)
@@ -221,6 +240,7 @@ def add_comment(movie_id):
         db.session.rollback()
         print(f"Error adding comment: {str(e)}")
         return jsonify({"error": "Failed to add comment"}), 500
+
 
 @app.route("/movies/<int:movie_id>/comments", methods=["GET"])
 def get_comments(movie_id):
@@ -244,6 +264,7 @@ def get_comments(movie_id):
         )
 
     return jsonify(comment_list), 200
+
 
 @app.route("/favorites", methods=["POST"])
 @jwt_required()
@@ -274,6 +295,7 @@ def add_to_favorites():
         {"message": f"'{movie.title}' has been added to your favorites!"}
     ), 201
 
+
 @app.route("/favorites", methods=["GET"])
 @jwt_required()
 def get_favorites():
@@ -302,7 +324,9 @@ def get_favorites():
             if sort_order == "asc"
             else Movie.release_date.desc()
         )
+
     favorites = favorites.all()
+
     favorite_list = [
         {
             "id": favorite.movie.id,
@@ -313,7 +337,9 @@ def get_favorites():
         }
         for favorite in favorites
     ]
+
     return jsonify(favorite_list), 200
+
 
 @app.route("/favorites/<int:movie_id>", methods=["DELETE"])
 @jwt_required()
@@ -381,8 +407,12 @@ def search_movies():
         "per_page": per_page,
         "total_results": total_movies,
     }
+
     return jsonify(response), 200
+
+
 with app.app_context():
     db.create_all()
+
 if __name__ == "__main__":
     app.run(debug=True, threaded=False)

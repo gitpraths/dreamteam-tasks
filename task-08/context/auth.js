@@ -21,11 +21,25 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (username, password) => {
-    const res = await api.post("/login", { username, password });
+    try {
+      const res = await api.post("/login", { username, password });
 
-    localStorage.setItem("access_token", res.data.access_token);
+      localStorage.setItem("access_token", res.data.access_token);
 
-    setUser(res.data.username);
+      setUser(res.data.username);
+    } catch (error) {
+      console.error("Login Error:", error.response?.data || error.message);
+
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        throw new Error(error.response.data.message);
+      } else {
+        throw new Error("An unexpected error occurred. Please try again.");
+      }
+    }
   };
 
   const logout = () => {

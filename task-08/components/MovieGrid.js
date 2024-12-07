@@ -1,7 +1,14 @@
 import React from "react";
 import MovieCard from "./MovieCard";
+import { useRouter } from "next/router";
+import api from "../utils/api";
 
 export default function MovieGrid({ movies }) {
+  const router = useRouter();
+
+  const handleViewDetails = (movie) => {
+    router.push(`/movies/${movie.id}`);
+  };
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -26,10 +33,29 @@ export default function MovieGrid({ movies }) {
   );
 
   function handleAddToFavorites(movie) {
-    alert(`"${movie.title}" has been added to your favorites!`);
-  }
+    const token = localStorage.getItem("access_token");
 
-  function handleViewDetails(movie) {
-    alert(`Viewing details for "${movie.title}":\n${movie.synopsis}`);
+    if (!token) {
+      alert("Please log in to add to favorites.");
+      return;
+    }
+
+    api
+      .post(
+        "/favorites",
+        { movie_id: movie.id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        alert(response.data.message);
+      })
+      .catch((err) => {
+        console.error(err.response.data || err.message);
+        alert("Failed to add to favorites.");
+      });
   }
 }

@@ -14,6 +14,8 @@ const Movies = () => {
         limit: 3,
       },
     });
+
+    console.log("API Response Data:", response.data);
     const data = response.data;
     setMovies(data.movies);
     setTotalPages(data.totalPages);
@@ -32,16 +34,33 @@ const Movies = () => {
   };
 
   return (
-    <div>
-      <MovieGrid movies={movies} />
-      <div className="pagination-container">
-        {currentPage > 1 && (
-          <button onClick={handlePreviousPage}>Previous</button>
-        )}
-        {currentPage < totalPages && (
-          <button onClick={handleNextPage}>Next</button>
-        )}
+    <div className="max-w-12xl mx-auto mt-8">
+      <div className="flex justify-between items-center mb-4">
+        <button
+          onClick={handlePreviousPage}
+          disabled={currentPage <= 1}
+          className={`px-4 py-2 mb-4 bg-blue-600 text-white font-medium rounded ${
+            currentPage <= 1
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:bg-blue-700"
+          }`}
+        >
+          Previous
+        </button>
+
+        <button
+          onClick={handleNextPage}
+          disabled={currentPage >= totalPages}
+          className={`px-4 py-2 mb-4 bg-blue-600 text-white font-medium rounded ${
+            currentPage >= totalPages
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:bg-blue-700"
+          }`}
+        >
+          Next
+        </button>
       </div>
+      <MovieGrid movies={movies} />
     </div>
   );
 };
