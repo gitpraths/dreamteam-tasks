@@ -27,6 +27,7 @@ This repository documents my journey of completing the tasks assigned in the Dre
 * **Status**: Completed (Except Chapter 18)
 * Automated repetitive tasks using Python scripts.  
 * Tasks included file operations, web scraping, and scheduling.
+* Couldn't prepare a README>md file for chapter 16 and 17 as well...
 
 ### Task 04: Web Dev Basics  
 * **Status**: Completed  
@@ -80,7 +81,7 @@ These tasks showcased the seamless integration of **Next.js** for frontend and *
 | 00       | Linux                      | Mac User  |
 | 01       | CLI & Git                  | Completed      |
 | 02       | The Open Source Conventions & Google Dorking | Completed      |
-| 03       | Automate the Boring Stuff! | Completed      |
+| 03       | Automate the Boring Stuff! | Completed (Expect Chapter 18)      |
 | 04       | Web Dev Basics             | Completed      |
 | 05       | Not a SRS Doc              | Completed      |
 | 06       | Wireframe the Skeleton     | Not Attempted  |
