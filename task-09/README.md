@@ -37,8 +37,8 @@ Make sure you have the following installed:
 ## Installation
 
 ```bash
-git clone https://github.com/your-repo.git
-cd your-repo
+git clone https://github.com/gitpraths/dreamteam-tasks.git
+cd ~/dreamteam-tasks/task-09
 ```
 
 ## Create a virtual environment:
@@ -75,7 +75,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"username": "prarthana", "
 
 curl -X GET \
  http://127.0.0.1:5000/protected \
- -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczMjg3Njg4OSwianRpIjoiNzc4ZWU4MDktNTMxZS00NjQ5LTkxYTUtNzRmMDc0M2ZlMDE5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InByYXJ0aGFuYSIsIm5iZiI6MTczMjg3Njg4OSwiY3NyZiI6IjE5N2Q3NjBlLTc4MmMtNDJlNS1iMTNiLTE2ZTIyZjE4ZmRlYyIsImV4cCI6MTczMjg3Nzc4OX0.L8Jl_J0-BF94um3HTaUXoRN6FWFoU8PvsoEowwb3azo'
+ -H '*access token*'
 
 curl -X GET \
  http://127.0.0.1:5000/movies \
